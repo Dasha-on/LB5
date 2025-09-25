@@ -1,0 +1,48 @@
+﻿<Page x:Class="PProjectK.Pages.AddEditBildPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PProjectK.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddEditBildPage">
+
+    <Grid Background="#1E1E1E">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="81*"/>
+            <ColumnDefinition Width="79*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="136*"/>
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">
+            <TextBlock Text="Напишите название здания" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Black" FontStyle="Italic" FontSize="20" Height="26" Width="382" />
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Напишите адрес" HorizontalAlignment="Center" Grid.Row="1"  VerticalAlignment="Top" Foreground="White" FontWeight="Black" FontStyle="Italic" FontSize="20" Height="26" Width="241" Margin="0,30,0,0" />
+        </StackPanel>
+        <TextBox Text="{Binding NameBild}" Grid.Column="1"  FontSize="15" Margin="10,20,10,20" Foreground="Black" />
+        <TextBox Text="{Binding Location}" Grid.Column="1" Grid.Row="1"  FontSize="15" Margin="10,20,10,20" Foreground="Black" />
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="2" Width="395">
+            <Button  Content="Сохранить" Click="save_Click" Background="#F44336" Foreground="White" FontWeight="Black" FontStyle="Italic" FontSize="20"  Margin="15" Grid.Row="2" Width="204" Height="47">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="1" Width="385">
+            <Button  Content="Отмена" Click="back_Click" Background="#607D8B" Foreground="White" FontWeight="Black" FontStyle="Italic" FontSize="20" Grid.Row="2" Margin ="15" Height="41" Width="201">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

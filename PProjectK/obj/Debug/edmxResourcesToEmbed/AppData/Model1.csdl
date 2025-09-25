@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TestEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bild" EntityType="TestModel.Bild" />
+    <EntitySet Name="CounditionEquipment" EntityType="TestModel.CounditionEquipment" />
+    <EntitySet Name="SportEquipment" EntityType="TestModel.SportEquipment" />
+    <EntitySet Name="VidSport" EntityType="TestModel.VidSport" />
+    <AssociationSet Name="FK_SportEquipment_Bild" Association="TestModel.FK_SportEquipment_Bild">
+      <End Role="Bild" EntitySet="Bild" />
+      <End Role="SportEquipment" EntitySet="SportEquipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SportEquipment_CounditionEquipment" Association="TestModel.FK_SportEquipment_CounditionEquipment">
+      <End Role="CounditionEquipment" EntitySet="CounditionEquipment" />
+      <End Role="SportEquipment" EntitySet="SportEquipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SportEquipment_VidSport" Association="TestModel.FK_SportEquipment_VidSport">
+      <End Role="VidSport" EntitySet="VidSport" />
+      <End Role="SportEquipment" EntitySet="SportEquipment" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Bild">
+    <Key>
+      <PropertyRef Name="IDBild" />
+    </Key>
+    <Property Name="IDBild" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameBild" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SportEquipment" Relationship="TestModel.FK_SportEquipment_Bild" FromRole="Bild" ToRole="SportEquipment" />
+  </EntityType>
+  <EntityType Name="CounditionEquipment">
+    <Key>
+      <PropertyRef Name="IDCoundition" />
+    </Key>
+    <Property Name="IDCoundition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Coundition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SportEquipment" Relationship="TestModel.FK_SportEquipment_CounditionEquipment" FromRole="CounditionEquipment" ToRole="SportEquipment" />
+  </EntityType>
+  <EntityType Name="SportEquipment">
+    <Key>
+      <PropertyRef Name="IDSportEquipment" />
+    </Key>
+    <Property Name="IDSportEquipment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameEuipment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="IDCo" Type="Int32" />
+    <Property Name="IDSport" Type="Int32" />
+    <Property Name="IDZd" Type="Int32" />
+    <NavigationProperty Name="Bild" Relationship="TestModel.FK_SportEquipment_Bild" FromRole="SportEquipment" ToRole="Bild" />
+    <NavigationProperty Name="CounditionEquipment" Relationship="TestModel.FK_SportEquipment_CounditionEquipment" FromRole="SportEquipment" ToRole="CounditionEquipment" />
+    <NavigationProperty Name="VidSport" Relationship="TestModel.FK_SportEquipment_VidSport" FromRole="SportEquipment" ToRole="VidSport" />
+  </EntityType>
+  <EntityType Name="VidSport">
+    <Key>
+      <PropertyRef Name="IDVidSport" />
+    </Key>
+    <Property Name="IDVidSport" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameSport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SportEquipment" Relationship="TestModel.FK_SportEquipment_VidSport" FromRole="VidSport" ToRole="SportEquipment" />
+  </EntityType>
+  <Association Name="FK_SportEquipment_Bild">
+    <End Type="TestModel.Bild" Role="Bild" Multiplicity="0..1" />
+    <End Type="TestModel.SportEquipment" Role="SportEquipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bild">
+        <PropertyRef Name="IDBild" />
+      </Principal>
+      <Dependent Role="SportEquipment">
+        <PropertyRef Name="IDZd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SportEquipment_CounditionEquipment">
+    <End Type="TestModel.CounditionEquipment" Role="CounditionEquipment" Multiplicity="0..1" />
+    <End Type="TestModel.SportEquipment" Role="SportEquipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CounditionEquipment">
+        <PropertyRef Name="IDCoundition" />
+      </Principal>
+      <Dependent Role="SportEquipment">
+        <PropertyRef Name="IDCo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SportEquipment_VidSport">
+    <End Type="TestModel.VidSport" Role="VidSport" Multiplicity="0..1" />
+    <End Type="TestModel.SportEquipment" Role="SportEquipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VidSport">
+        <PropertyRef Name="IDVidSport" />
+      </Principal>
+      <Dependent Role="SportEquipment">
+        <PropertyRef Name="IDSport" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bdcdffcebcfb4dcb9ec955f4d22d0180" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="TestModel.Bild" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="TestModel.CounditionEquipment" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="TestModel.SportEquipment" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="TestModel.VidSport" Width="1.5" PointX="0.75" PointY="4.625" />
+        <AssociationConnector Association="TestModel.FK_SportEquipment_Bild" />
+        <AssociationConnector Association="TestModel.FK_SportEquipment_CounditionEquipment" />
+        <AssociationConnector Association="TestModel.FK_SportEquipment_VidSport" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

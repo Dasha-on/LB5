@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище TestModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bild">
+          <Key>
+            <PropertyRef Name="IDBild" />
+          </Key>
+          <Property Name="IDBild" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameBild" Type="nvarchar" MaxLength="50" />
+          <Property Name="Location" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="CounditionEquipment">
+          <Key>
+            <PropertyRef Name="IDCoundition" />
+          </Key>
+          <Property Name="IDCoundition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Coundition" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SportEquipment">
+          <Key>
+            <PropertyRef Name="IDSportEquipment" />
+          </Key>
+          <Property Name="IDSportEquipment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameEuipment" Type="nvarchar" MaxLength="50" />
+          <Property Name="Count" Type="int" />
+          <Property Name="IDCo" Type="int" />
+          <Property Name="IDSport" Type="int" />
+          <Property Name="IDZd" Type="int" />
+        </EntityType>
+        <EntityType Name="VidSport">
+          <Key>
+            <PropertyRef Name="IDVidSport" />
+          </Key>
+          <Property Name="IDVidSport" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameSport" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_SportEquipment_Bild">
+          <End Role="Bild" Type="Self.Bild" Multiplicity="0..1" />
+          <End Role="SportEquipment" Type="Self.SportEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bild">
+              <PropertyRef Name="IDBild" />
+            </Principal>
+            <Dependent Role="SportEquipment">
+              <PropertyRef Name="IDZd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SportEquipment_CounditionEquipment">
+          <End Role="CounditionEquipment" Type="Self.CounditionEquipment" Multiplicity="0..1" />
+          <End Role="SportEquipment" Type="Self.SportEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CounditionEquipment">
+              <PropertyRef Name="IDCoundition" />
+            </Principal>
+            <Dependent Role="SportEquipment">
+              <PropertyRef Name="IDCo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SportEquipment_VidSport">
+          <End Role="VidSport" Type="Self.VidSport" Multiplicity="0..1" />
+          <End Role="SportEquipment" Type="Self.SportEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VidSport">
+              <PropertyRef Name="IDVidSport" />
+            </Principal>
+            <Dependent Role="SportEquipment">
+              <PropertyRef Name="IDSport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище TestModelContainer">
+          <EntitySet Name="Bild" EntityType="Self.Bild" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CounditionEquipment" EntityType="Self.CounditionEquipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SportEquipment" EntityType="Self.SportEquipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VidSport" EntityType="Self.VidSport" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SportEquipment_Bild" Association="Self.FK_SportEquipment_Bild">
+            <End Role="Bild" EntitySet="Bild" />
+            <End Role="SportEquipment" EntitySet="SportEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SportEquipment_CounditionEquipment" Association="Self.FK_SportEquipment_CounditionEquipment">
+            <End Role="CounditionEquipment" EntitySet="CounditionEquipment" />
+            <End Role="SportEquipment" EntitySet="SportEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SportEquipment_VidSport" Association="Self.FK_SportEquipment_VidSport">
+            <End Role="VidSport" EntitySet="VidSport" />
+            <End Role="SportEquipment" EntitySet="SportEquipment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bild" EntityType="TestModel.Bild" />
+          <EntitySet Name="CounditionEquipment" EntityType="TestModel.CounditionEquipment" />
+          <EntitySet Name="SportEquipment" EntityType="TestModel.SportEquipment" />
+          <EntitySet Name="VidSport" EntityType="TestModel.VidSport" />
+          <AssociationSet Name="FK_SportEquipment_Bild" Association="TestModel.FK_SportEquipment_Bild">
+            <End Role="Bild" EntitySet="Bild" />
+            <End Role="SportEquipment" EntitySet="SportEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SportEquipment_CounditionEquipment" Association="TestModel.FK_SportEquipment_CounditionEquipment">
+            <End Role="CounditionEquipment" EntitySet="CounditionEquipment" />
+            <End Role="SportEquipment" EntitySet="SportEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SportEquipment_VidSport" Association="TestModel.FK_SportEquipment_VidSport">
+            <End Role="VidSport" EntitySet="VidSport" />
+            <End Role="SportEquipment" EntitySet="SportEquipment" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Bild">
+          <Key>
+            <PropertyRef Name="IDBild" />
+          </Key>
+          <Property Name="IDBild" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameBild" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SportEquipment" Relationship="TestModel.FK_SportEquipment_Bild" FromRole="Bild" ToRole="SportEquipment" />
+        </EntityType>
+        <EntityType Name="CounditionEquipment">
+          <Key>
+            <PropertyRef Name="IDCoundition" />
+          </Key>
+          <Property Name="IDCoundition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Coundition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SportEquipment" Relationship="TestModel.FK_SportEquipment_CounditionEquipment" FromRole="CounditionEquipment" ToRole="SportEquipment" />
+        </EntityType>
+        <EntityType Name="SportEquipment">
+          <Key>
+            <PropertyRef Name="IDSportEquipment" />
+          </Key>
+          <Property Name="IDSportEquipment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameEuipment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="IDCo" Type="Int32" />
+          <Property Name="IDSport" Type="Int32" />
+          <Property Name="IDZd" Type="Int32" />
+          <NavigationProperty Name="Bild" Relationship="TestModel.FK_SportEquipment_Bild" FromRole="SportEquipment" ToRole="Bild" />
+          <NavigationProperty Name="CounditionEquipment" Relationship="TestModel.FK_SportEquipment_CounditionEquipment" FromRole="SportEquipment" ToRole="CounditionEquipment" />
+          <NavigationProperty Name="VidSport" Relationship="TestModel.FK_SportEquipment_VidSport" FromRole="SportEquipment" ToRole="VidSport" />
+        </EntityType>
+        <EntityType Name="VidSport">
+          <Key>
+            <PropertyRef Name="IDVidSport" />
+          </Key>
+          <Property Name="IDVidSport" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameSport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SportEquipment" Relationship="TestModel.FK_SportEquipment_VidSport" FromRole="VidSport" ToRole="SportEquipment" />
+        </EntityType>
+        <Association Name="FK_SportEquipment_Bild">
+          <End Type="TestModel.Bild" Role="Bild" Multiplicity="0..1" />
+          <End Type="TestModel.SportEquipment" Role="SportEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bild">
+              <PropertyRef Name="IDBild" />
+            </Principal>
+            <Dependent Role="SportEquipment">
+              <PropertyRef Name="IDZd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SportEquipment_CounditionEquipment">
+          <End Type="TestModel.CounditionEquipment" Role="CounditionEquipment" Multiplicity="0..1" />
+          <End Type="TestModel.SportEquipment" Role="SportEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CounditionEquipment">
+              <PropertyRef Name="IDCoundition" />
+            </Principal>
+            <Dependent Role="SportEquipment">
+              <PropertyRef Name="IDCo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SportEquipment_VidSport">
+          <End Type="TestModel.VidSport" Role="VidSport" Multiplicity="0..1" />
+          <End Type="TestModel.SportEquipment" Role="SportEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VidSport">
+              <PropertyRef Name="IDVidSport" />
+            </Principal>
+            <Dependent Role="SportEquipment">
+              <PropertyRef Name="IDSport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TestModelContainer" CdmEntityContainer="TestEntities">
+          <EntitySetMapping Name="Bild">
+            <EntityTypeMapping TypeName="TestModel.Bild">
+              <MappingFragment StoreEntitySet="Bild">
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="NameBild" ColumnName="NameBild" />
+                <ScalarProperty Name="IDBild" ColumnName="IDBild" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CounditionEquipment">
+            <EntityTypeMapping TypeName="TestModel.CounditionEquipment">
+              <MappingFragment StoreEntitySet="CounditionEquipment">
+                <ScalarProperty Name="Coundition" ColumnName="Coundition" />
+                <ScalarProperty Name="IDCoundition" ColumnName="IDCoundition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SportEquipment">
+            <EntityTypeMapping TypeName="TestModel.SportEquipment">
+              <MappingFragment StoreEntitySet="SportEquipment">
+                <ScalarProperty Name="IDZd" ColumnName="IDZd" />
+                <ScalarProperty Name="IDSport" ColumnName="IDSport" />
+                <ScalarProperty Name="IDCo" ColumnName="IDCo" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="NameEuipment" ColumnName="NameEuipment" />
+                <ScalarProperty Name="IDSportEquipment" ColumnName="IDSportEquipment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VidSport">
+            <EntityTypeMapping TypeName="TestModel.VidSport">
+              <MappingFragment StoreEntitySet="VidSport">
+                <ScalarProperty Name="NameSport" ColumnName="NameSport" />
+                <ScalarProperty Name="IDVidSport" ColumnName="IDVidSport" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

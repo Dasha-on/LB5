@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище TestModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bild">
+    <Key>
+      <PropertyRef Name="IDBild" />
+    </Key>
+    <Property Name="IDBild" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameBild" Type="nvarchar" MaxLength="50" />
+    <Property Name="Location" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="CounditionEquipment">
+    <Key>
+      <PropertyRef Name="IDCoundition" />
+    </Key>
+    <Property Name="IDCoundition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Coundition" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SportEquipment">
+    <Key>
+      <PropertyRef Name="IDSportEquipment" />
+    </Key>
+    <Property Name="IDSportEquipment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameEuipment" Type="nvarchar" MaxLength="50" />
+    <Property Name="Count" Type="int" />
+    <Property Name="IDCo" Type="int" />
+    <Property Name="IDSport" Type="int" />
+    <Property Name="IDZd" Type="int" />
+  </EntityType>
+  <EntityType Name="VidSport">
+    <Key>
+      <PropertyRef Name="IDVidSport" />
+    </Key>
+    <Property Name="IDVidSport" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameSport" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_SportEquipment_Bild">
+    <End Role="Bild" Type="Self.Bild" Multiplicity="0..1" />
+    <End Role="SportEquipment" Type="Self.SportEquipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bild">
+        <PropertyRef Name="IDBild" />
+      </Principal>
+      <Dependent Role="SportEquipment">
+        <PropertyRef Name="IDZd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SportEquipment_CounditionEquipment">
+    <End Role="CounditionEquipment" Type="Self.CounditionEquipment" Multiplicity="0..1" />
+    <End Role="SportEquipment" Type="Self.SportEquipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CounditionEquipment">
+        <PropertyRef Name="IDCoundition" />
+      </Principal>
+      <Dependent Role="SportEquipment">
+        <PropertyRef Name="IDCo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SportEquipment_VidSport">
+    <End Role="VidSport" Type="Self.VidSport" Multiplicity="0..1" />
+    <End Role="SportEquipment" Type="Self.SportEquipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VidSport">
+        <PropertyRef Name="IDVidSport" />
+      </Principal>
+      <Dependent Role="SportEquipment">
+        <PropertyRef Name="IDSport" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище TestModelContainer">
+    <EntitySet Name="Bild" EntityType="Self.Bild" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CounditionEquipment" EntityType="Self.CounditionEquipment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SportEquipment" EntityType="Self.SportEquipment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VidSport" EntityType="Self.VidSport" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_SportEquipment_Bild" Association="Self.FK_SportEquipment_Bild">
+      <End Role="Bild" EntitySet="Bild" />
+      <End Role="SportEquipment" EntitySet="SportEquipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SportEquipment_CounditionEquipment" Association="Self.FK_SportEquipment_CounditionEquipment">
+      <End Role="CounditionEquipment" EntitySet="CounditionEquipment" />
+      <End Role="SportEquipment" EntitySet="SportEquipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SportEquipment_VidSport" Association="Self.FK_SportEquipment_VidSport">
+      <End Role="VidSport" EntitySet="VidSport" />
+      <End Role="SportEquipment" EntitySet="SportEquipment" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
